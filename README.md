@@ -2,7 +2,7 @@
 
 CIM is a causal discovery algorithm that can infer causal structure even when cycles, latent variables, selection bias, non-linearity and non-stationarity exist simultaneously. 
 
-CIM assumes that the joint distribution can be modeled as a mixture of DAGs. Why? Because it turns out that most other causal discovery algorithms orient too many arrowheads in practice, particularly if they allow latent variables and selection bias. See it for yourself:
+CIM assumes that the joint distribution can be modeled as a mixture of DAGs. Most other causal discovery algorithms orient too many arrowheads in practice, particularly if they allow latent variables and selection bias. For example:
 
 
 
