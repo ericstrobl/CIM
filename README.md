@@ -10,3 +10,8 @@ A possible explanation for this phenomenon is that real joint distributions actu
 
 
 CIM was designed to accurately discover causal relationships from clinical data, where causal processes often contain cycles and evolve over time. I suspect that CIM works well with other data types as well.
+
+# Causal Inference over Mixtures (CIM)
+
+
+# Run the Algorithm on Clinical Datasets
