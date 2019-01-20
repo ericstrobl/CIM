@@ -1,17 +1,15 @@
 # Causal Inference over Mixtures (CIM)
 
-CIM is a causal discovery algorithm that can infer causal structure even when cycles, latent variables, selection bias, non-linearity and non-stationarity exist simultaneously. 
+Real causal processes often do not follow a single directed graph because causal processes usually change over time. CIM is an algorithm for inferring causation from non-experimental data when the causal process changes. CIM requires longitudinal data or some other prior knowledge to rule out causal relationships. CIM outperforms PC, FCI, RFCI and CCI by a large margin on average, even if we give the other algorithms the same time information or prior knowledge. The algorithm was inspired by the observation that X and Y are often conditionally independent in real non-experimental data when X causes Y.
 
-CIM assumes that the joint distribution can be modeled as a mixture of DAGs. Most other causal discovery algorithms orient too many arrowheads in practice, particularly if they allow latent variables and selection bias. For example:
-
-
-
-A possible explanation for this phenomenon is that real joint distributions actually arise from multiple causal processes (i.e., a mixture of DAGs) rather than just a single causal process (i.e., a single directed graph).
-
-
-CIM was designed to accurately discover causal relationships from clinical data, where causal processes often contain cycles and evolve over time. I suspect that CIM works well with other data types as well.
+CIM can also handle cycles, latent variables, selection bias, and non-linearity simultaneously. This repository allows you install and then run CIM with a few lines of codes.
 
 # Installation
 
 
-# Run the Algorithm on Clinical Longitudinal Data
+# Run the Algorithm on Real Longitudinal Data
+- Framingham Heart Study:
+
+- Mayo Clinic Primary Biliary Cirrhosis Study:
+
+- 
