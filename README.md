@@ -30,3 +30,16 @@ The package depends on the MASS and pcalg packages on CRAN, so please install th
 
 > print(out$maag) # print recovered partially oriented father graph
 
+
+# How to Interpret the Output
+
+Let S denote the selection variables
+
+`G$maag[i,j] = 0` means that CIM could render i and j conditionally independent
+
+`G$maag[i,j] = 1` means CIM could *not* render i and j conditionally independent, and CIM does *not* know if j is an ancestor or not an ancestor of i or S
+
+`G$maag[i,j] = 2` means j is *not* an ancestor of i
+
+`G$maag[i,j] = 3` means j is an ancestor of i or S
+
