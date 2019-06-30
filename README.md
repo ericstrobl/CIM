@@ -4,7 +4,7 @@ Many real causal processes contain cycles and evolve. However, most causal disco
 
 # Installation
 
-The package depends on the MASS,pcalg and igraph packages on CRAN, so please install these first. Then:
+The package depends on the MASS and pcalg packages on CRAN, so please install those first. Then:
 
 > library(devtools)
 
@@ -16,7 +16,11 @@ The package depends on the MASS,pcalg and igraph packages on CRAN, so please ins
 
 > synth_list= sample_mix_DAGs2(mDAGs,1000);  suffStat=list(); suffStat$data = synth_list$data; # generate 1000 samples from the mixture of DAGs
 
-> plot(as(synth_list$mDAGs$graph,"graphNEL")) # plot the ground truth mother graph
+> plot(as(synth_list$mDAGs$graph,"graphNEL")) # plot the ground truth father graph
 
-> out = CIM(suffStat, RCoT_wrap, alpha=0.01, p=ncol(suffStat$data), waves=waves)
+> out = CIM(suffStat, RCoT_wrap, alpha=0.01, p=ncol(suffStat$data), waves=waves) # run CIM
+
+> colnames(out$maag) <- mDAGs$actual_indices; rownames(out$maag) <- mDAGs$actual_indices # modify indices to account for possible latent and selection variables
+
+> print(out$maag) # print recovered partially oriented father graph
 
