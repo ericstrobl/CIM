@@ -10,7 +10,7 @@ The package depends on the MASS and pcalg packages on CRAN, so please install th
 
 > install_github("ericstrobl/CIM"); install_github("ericstrobl/RCIT")
 
-> library(CIM); library(RCIT)
+> library(CIM); library(RCIT); library(pcalg)
 
 # Run CIM
 
