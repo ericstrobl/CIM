@@ -16,7 +16,7 @@ The package depends on the MASS, pcalg and igraph packages, so please install th
 
 > waves = list(w1=1:8,w2=9:16,w3=17:24) # create 3 waves containing 8 variables each
 
-> mDAGs = generate_mix_DAGs(nIndep=sample(5:15,1),p=24,en=2,waves=waves) # generate a mixture of DAGs across the 3 waves with latent and selection variables
+> mDAGs = generate_mix_DAGs(nIndep=sample(5:15,1),p=24,en=2,waves=waves) # generate a mixture of 5-15 DAGs with the waves; also include latent and selection variables
 
 > synth_list= sample_mix_DAGs(mDAGs,1000);  suffStat=list(); suffStat$data = synth_list$data; # generate 1000 samples from the mixture of DAGs with latent and selection variables
 
