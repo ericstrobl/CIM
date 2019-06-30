@@ -1,11 +1,13 @@
 #' Causal Inference over Mixtures (CIM) algorithm
-#' @param suffStat
-#' @param indepTest Random variable y.
-#' @param alpha Random variable z.
-#' @param p
-#' @param waves Random variable y.
-#' @param verbose Random variable z.
-#' @param resIP Random variable z.
+#' @param suffStat Sufficient statistics for conditional independence test
+#' @param indepTest Conditional independence test
+#' @param alpha alpha level
+#' @param p Total number of variables
+#' @param waves List containing wave information
+#' @param verbose
+#' @param prior_know List containing any other prior knowledge (default: NULL)
+#' @param resIP Precomputed skeleton if available (default: NULL)
+#' @export
 
 CIM <- function (suffStat, indepTest, alpha, p, waves,
                  verbose = FALSE, prior_know = NULL, resIP = NULL)
