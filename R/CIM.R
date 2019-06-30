@@ -50,5 +50,5 @@ CIM <- function (suffStat, indepTest, alpha, p, waves,
   res <- udag2pag4_simple(pag = G1, sepset, sepset2, c(), rules = rules,
                           unfVect = NULL, verbose = verbose, rules_used = c())
 
-  return(list(pofaag = res$pag, pre_OR_res = G1, rules_used = res$rules_used, sepset=sepset))
+  return(list(pofaag = res$pag, pre_OR_res = G1, sepset=sepset))
 }
