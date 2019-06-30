@@ -14,11 +14,13 @@ The package depends on the MASS and pcalg packages on CRAN, so please install th
 
 # Generate Synthetic Data
 
-> waves = list(w1=1:8,w2=9:16,w3=17:24); mDAGs = generate_mix_DAGs(nIndep=sample(5:15,1),p=24,en=2,waves=waves) # generate a mixture of DAGs with 3 waves containing 8 variables each
+> waves = list(w1=1:8,w2=9:16,w3=17:24) # create 3 waves containing 8 variables each
 
-> synth_list= sample_mix_DAGs(mDAGs,1000);  suffStat=list(); suffStat$data = synth_list$data; # generate 1000 samples from the mixture of DAGs with latent and selection variables
+> mDAGs = generate_mix_DAGs(nIndep=sample(5:15,1),p=24,en=2,waves=waves) # generate a mixture of DAGs across the 3 waves
 
 > plot(as(synth_list$mDAGs$graph,"graphNEL")) # plot the ground truth father graph
+
+> synth_list= sample_mix_DAGs(mDAGs,1000);  suffStat=list(); suffStat$data = synth_list$data; # generate 1000 samples from the mixture of DAGs with latent and selection variables
 
 > resort_p = sample(ncol(synth_data),ncol(synth_data),replace=FALSE); waves = list(w1 = match(waves2$w1,resort_p), w2 = match(waves2$w2,resort_p), w3 = match(waves2$w3,resort_p));  # reorganize waves according to latent and selection variables
 
