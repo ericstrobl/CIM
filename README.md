@@ -20,7 +20,9 @@ The package depends on the MASS and pcalg packages on CRAN, so please install th
 
 > plot(as(synth_list$mDAGs$graph,"graphNEL")) # plot the ground truth father graph
 
-> resort_p = sample(ncol(synth_data),ncol(synth_data),replace=FALSE); waves = list(w1 = match(waves2$w1,resort_p), w2 = match(waves2$w2,resort_p), w3 = match(waves2$w3,resort_p));  suffStat$data = synth_data[,resort_p]; # reorganize waves and data according to latent and selection variables
+> resort_p = sample(ncol(synth_data),ncol(synth_data),replace=FALSE); waves = list(w1 = match(waves2$w1,resort_p), w2 = match(waves2$w2,resort_p), w3 = match(waves2$w3,resort_p));  # reorganize waves according to latent and selection variables
+
+> suffStat$data = synth_data[,resort_p]; # reorganize data according to latent and selection variables
 
 # Run CIM on Synthetic Data
 
