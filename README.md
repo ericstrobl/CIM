@@ -26,20 +26,20 @@ The package depends on the MASS and pcalg packages on CRAN, so please install th
 
 > out = CIM(suffStat, RCoT_wrap, alpha=0.01, p=ncol(suffStat$data), waves=mDAGs$waves) # run CIM
 
-> colnames(out$maag) <- mDAGs$actual_indices; rownames(out$maag) <- mDAGs$actual_indices # modify indices to account for possible latent and selection variables
+> colnames(out$pofaag) <- mDAGs$actual_indices; rownames(out$maag) <- mDAGs$actual_indices # modify indices to account for possible latent and selection variables
 
-> print(out$maag) # print recovered partially oriented father graph
+> print(out$pofaag) # print recovered partially oriented father AAG
 
 
 # How to Interpret the Output
 
 Let S denote the selection variables
 
-`G$maag[i,j] = 0` means that CIM could render i and j conditionally independent
+`out$pofaag[i,j] = 0` means that CIM could render i and j conditionally independent
 
-`G$maag[i,j] = 1` means CIM could *not* render i and j conditionally independent, and CIM does *not* know if j is an ancestor or not an ancestor of i or S
+`out$pofaag[i,j] = 1` means CIM could *not* render i and j conditionally independent, and CIM does *not* know if j is an ancestor or not an ancestor of i or S
 
-`G$maag[i,j] = 2` means j is *not* an ancestor of i
+`out$pofaag[i,j] = 2` means j is *not* an ancestor of i in the father AAG
 
-`G$maag[i,j] = 3` means j is an ancestor of i or S
+`out$pofaag[i,j] = 3` means j is an ancestor of i or S in the father AAG
 
