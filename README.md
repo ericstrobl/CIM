@@ -4,7 +4,7 @@ Many real causal processes contain cycles and evolve. However, most causal disco
 
 # Installation
 
-The package depends on the MASS and pcalg packages on CRAN, so please install those first. Then:
+The package depends on the MASS, pcalg and igraph packages, so please install those first. Then:
 
 > library(devtools)
 
