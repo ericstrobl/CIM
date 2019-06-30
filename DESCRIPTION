@@ -1,0 +1,10 @@
+Package: CIM
+Type: Package
+Title: Causal Inference over Mixtures (CIM)
+Version: 0.1.0
+Author: Eric V. Strobl
+Description: CIM infers causal structure from a mixture of DAGs using longitudinal data
+License: CC BY-NC 4.0
+Encoding: UTF-8
+Depends: pcalg, MASS
+LazyData: true
