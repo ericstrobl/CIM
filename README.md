@@ -26,7 +26,7 @@ The package depends on the MASS, pcalg and igraph packages, so please install th
 
 > out = CIM(suffStat, RCoT_wrap, alpha=0.01, p=ncol(suffStat$data), waves=mDAGs$waves) # run CIM
 
-> colnames(out$pofaag) <- mDAGs$actual_indices; rownames(out$maag) <- mDAGs$actual_indices # modify indices to account for possible latent and selection variables
+> colnames(out$pofaag) <- mDAGs$actual_indices; rownames(out$pofaag) <- mDAGs$actual_indices # modify indices to account for possible latent and selection variables
 
 > print(out$pofaag) # print recovered partially oriented father AAG
 
