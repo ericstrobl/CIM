@@ -12,6 +12,8 @@ The package depends on the MASS and pcalg packages on CRAN, so please install th
 
 > library(CIM); library(RCIT)
 
+# Run CIM
+
 > waves = list(w1=1:8,w2=9:16,w3=17:24); mDAGs = generate_mix_DAGs(nIndep=sample(5:15,1),p=24,en=2,waves=waves) # generate a mixture of DAGs with 3 waves containing 8 variables each
 
 > synth_list= sample_mix_DAGs2(mDAGs,1000);  suffStat=list(); suffStat$data = synth_list$data; # generate 1000 samples from the mixture of DAGs
