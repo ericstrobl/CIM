@@ -33,7 +33,7 @@ The package depends on the MASS, pcalg and igraph packages, so please install th
 
 # How to Interpret the Output
 
-Let S denote the selection variables
+Let S denote the selection variables.
 
 `out$pofaag[i,j] = 0` means that CIM could render i and j conditionally independent
 
