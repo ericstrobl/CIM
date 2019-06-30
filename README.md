@@ -18,9 +18,9 @@ The package depends on the MASS and pcalg packages on CRAN, so please install th
 
 > mDAGs = generate_mix_DAGs(nIndep=sample(5:15,1),p=24,en=2,waves=waves) # generate a mixture of DAGs across the 3 waves with latent and selection variables
 
-> plot(as(synth_list$mDAGs$graph,"graphNEL")) # plot the ground truth father graph
-
 > synth_list= sample_mix_DAGs(mDAGs,1000);  suffStat=list(); suffStat$data = synth_list$data; # generate 1000 samples from the mixture of DAGs with latent and selection variables
+
+> plot(as(synth_list$mDAGs$graph,"graphNEL")) # plot the ground truth father graph
 
 # Run CIM on Synthetic Data
 
