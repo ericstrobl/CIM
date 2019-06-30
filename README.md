@@ -22,10 +22,6 @@ The package depends on the MASS and pcalg packages on CRAN, so please install th
 
 > synth_list= sample_mix_DAGs(mDAGs,1000);  suffStat=list(); suffStat$data = synth_list$data; # generate 1000 samples from the mixture of DAGs with latent and selection variables
 
-> resort_p = sample(ncol(synth_data),ncol(synth_data),replace=FALSE); waves = list(w1 = match(waves2$w1,resort_p), w2 = match(waves2$w2,resort_p), w3 = match(waves2$w3,resort_p));  # reorganize waves according to latent and selection variables
-
-> suffStat$data = synth_data[,resort_p]; # reorganize data according to latent and selection variables
-
 # Run CIM on Synthetic Data
 
 > out = CIM(suffStat, RCoT_wrap, alpha=0.01, p=ncol(suffStat$data), waves=waves) # run CIM
