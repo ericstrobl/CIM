@@ -16,7 +16,12 @@ The package depends on the MASS and pcalg packages on CRAN, so please install th
 
 > waves = list(w1=1:8,w2=9:16,w3=17:24) # create 3 waves containing 8 variables each
 
-> mDAGs = generate_mix_DAGs(nIndep=sample(5:15,1),p=24,en=2,waves=waves) # generate a mixture of DAGs across the 3 waves
+> mDAGs = generate_mix_DAGs(nIndep=sample(5:15,1),p=24,en=2,waves=waves) # generate a mixture of DAGs across the 3 waves with latent and selection variables
+
+> waves2= list(w1=1:length(mDAGs$waves$w1),
+               w2=(length(mDAGs$waves$w1)+1):(length(mDAGs$waves$w1)+length(mDAGs$waves$w2)),
+               w3=(length(mDAGs$waves$w1)+length(mDAGs$waves$w2)+1):(length(mDAGs$waves$w1)+length(mDAGs$waves$w2)+length(mDAGs$waves$w3))
+               ) # reorganize waves according to generated latent and selection variables
 
 > plot(as(synth_list$mDAGs$graph,"graphNEL")) # plot the ground truth father graph
 
