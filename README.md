@@ -1,19 +1,22 @@
 # Causal Inference over Mixtures (CIM)
 
-Real causal processes often do not follow a single directed graph because causal processes usually change over time. CIM is an algorithm for inferring causation from non-experimental data even when the causal graph changes. 
-
-CIM requires longitudinal data or some other prior knowledge to rule out causal relationships. CIM outperforms PC, FCI, RFCI and CCI by a large margin on average, even if we give the other algorithms the same time information or prior knowledge. The algorithm was inspired by the observation that X and Y are often independent in real non-experimental data when X directly causes Y.
-
-CIM can also handle cycles, latent variables, selection bias, and non-linearity simultaneously; every effort was made to make the algorithm actually work well on real data without a catch. 
-
-This repository allows you install and then run CIM with a few lines of codes.
+Many real causal processes contain cycles and evolve. However, most causal discovery algorithms assume that the underlying causal process follows a single directed acyclic graph (DAG) that does not change over time. This repository contains code for a new algorithm called Causal Inference over Mixtures (CIM) which relaxes the single DAG assumption by modeling causal processes using a mixture of DAGs so that the graph can change over time. CIM uses longitudinal data to improves the accuracy of causal discovery on both real and synthetic clinical datasets even when cycles, non-stationarity, non-linearity, latent variables and selection bias exist simultaneously.
 
 # Installation
 
+The package depends on the MASS and igraph packages on CRAN, so please install these first. Then:
 
-# Run the Algorithm on Real Longitudinal Data
-- Framingham Heart Study:
+> library(devtools)
 
-- Mayo Clinic Primary Biliary Cirrhosis Study:
+> install_github("ericstrobl/CIM"); install_github("ericstrobl/RCIT")
 
-- 
+> library(CIM); library(RCIT)
+
+> waves = list(w1=1:8,w2=9:16,w3=17:24); mDAGs = generate_mix_DAGs(nIndep=sample(5:15,1),p=24,en=2,waves=waves) # generate a mixture of DAGs with 3 waves containing 8 variables each
+
+> synth_list= sample_mix_DAGs2(mDAGs,samps=1000);  suffStat$data = synth_data; # generate 1000 samples from the mixture of DAGs
+
+> plot(as(synth_list$mDAGs$graph,"graphNEL")) # plot the ground truth mother graph
+
+> out = CIM(suffStat, RCoT_wrap, alpha=0.01, p=ncol(suffStat$data), waves=waves)
+
