@@ -18,18 +18,13 @@ The package depends on the MASS and pcalg packages on CRAN, so please install th
 
 > mDAGs = generate_mix_DAGs(nIndep=sample(5:15,1),p=24,en=2,waves=waves) # generate a mixture of DAGs across the 3 waves with latent and selection variables
 
-> waves2= list(w1=1:length(mDAGs$waves$w1),
-               w2=(length(mDAGs$waves$w1)+1):(length(mDAGs$waves$w1)+length(mDAGs$waves$w2)),
-               w3=(length(mDAGs$waves$w1)+length(mDAGs$waves$w2)+1):(length(mDAGs$waves$w1)+length(mDAGs$waves$w2)+length(mDAGs$waves$w3))
-               ) # reorganize waves according to generated latent and selection variables
-
 > plot(as(synth_list$mDAGs$graph,"graphNEL")) # plot the ground truth father graph
 
 > synth_list= sample_mix_DAGs(mDAGs,1000);  suffStat=list(); suffStat$data = synth_list$data; # generate 1000 samples from the mixture of DAGs with latent and selection variables
 
 # Run CIM on Synthetic Data
 
-> out = CIM(suffStat, RCoT_wrap, alpha=0.01, p=ncol(suffStat$data), waves=waves) # run CIM
+> out = CIM(suffStat, RCoT_wrap, alpha=0.01, p=ncol(suffStat$data), waves=mDAGs$waves) # run CIM
 
 > colnames(out$maag) <- mDAGs$actual_indices; rownames(out$maag) <- mDAGs$actual_indices # modify indices to account for possible latent and selection variables
 
