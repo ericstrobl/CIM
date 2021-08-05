@@ -6,5 +6,5 @@ Author: Eric V. Strobl
 Description: CIM infers causal structure from a mixture of DAGs using longitudinal data
 License: CC BY-NC 4.0
 Encoding: UTF-8
-Depends: pcalg, MASS, RCIT, igraph
+Depends: pcalg, MASS, xgboost, igraph
 LazyData: true
