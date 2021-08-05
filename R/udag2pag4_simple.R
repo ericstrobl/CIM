@@ -1,5 +1,5 @@
-udag2pag4_simple <- function (pag, sepset, sepset2, sepset_e, rules = rep(TRUE, 8), unfVect = NULL, 
-                           verbose = FALSE, rules_used = c()) 
+udag2pag4_simple <- function (pag, indepTest, sepset, sepset2, sepset_e, rules = rep(TRUE, 8), unfVect = NULL, 
+                           verbose = FALSE, rules_used = c(), alpha = 0.01) 
 {
   rules = rep(FALSE,8)
   rules[c(1,5)]=TRUE
@@ -19,14 +19,35 @@ udag2pag4_simple <- function (pag, sepset, sepset2, sepset_e, rules = rep(TRUE, 
           indC <- setdiff(indC, a)
 
           for (c in indC) {
-            if (b %in% sepset[[a]][[c]] | length(sepset2[[a]][[b]][[c]])>0 ){
+            if (b %in% sepset[[a]][[c]]){
+              # pval1 <- indepTest(a, b, setdiff(sepset[[a]][[c]],b), suffStat)
+              # pval2 <- indepTest(c, b, setdiff(sepset[[a]][[c]],b), suffStat)
+              # if ((pval1 < alpha) & (pval2 < alpha)) {
+              #   pag[c, b] <- 3
+              # }
               pag[c, b] <- 3
               rules_used = unique(c(rules_used, 1))
-              if (verbose) 
-                cat("\nRule 1a", "\nOrient:", a, "*->", 
-                    b, "o-*", c, "as:", b, "-*", c, 
-                    "\n")
+            } else if (length(sepset2[[a]][[b]][[c]])>0){
+              # pval1 <- indepTest(a, b, setdiff(sepset2[[a]][[b]][[c]],b), suffStat)
+              # pval2 <- indepTest(c, b, setdiff(sepset2[[a]][[b]][[c]],b), suffStat)
+              # if ((pval1 < alpha) & (pval2 < alpha)) {
+              #   pag[c, b] <- 3
+              # }
+              pag[c, b] <- 3
+              rules_used = unique(c(rules_used, 1))
+            }  else if (length(sepset2[[c]][[b]][[a]])>0){
+              # pval1 <- indepTest(a, b, setdiff(sepset2[[c]][[b]][[a]],b), suffStat)
+              # pval2 <- indepTest(c, b, setdiff(sepset2[[c]][[b]][[a]],b), suffStat)
+              # if ((pval1 < alpha) & (pval2 < alpha)) {
+              #   pag[c, b] <- 3
+              # }
+              pag[c, b] <- 3
+              rules_used = unique(c(rules_used, 1))
             }
+            if (verbose) 
+              cat("\nRule 1a", "\nOrient:", a, "*->", 
+                  b, "o-*", c, "as:", b, "-*", c, 
+                  "\n")
           }
         }
       }
