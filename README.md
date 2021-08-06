@@ -12,7 +12,7 @@ The package depends on the MASS, pcalg and igraph packages, so please install th
 
 > library(CIM)
 
-# Generate Synthetic Data
+# Sample from a Mixture of DAGs
 
 > waves = list(w1=1:8,w2=9:16,w3=17:24) # create 3 waves containing 8 variables each
 
@@ -20,9 +20,9 @@ The package depends on the MASS, pcalg and igraph packages, so please install th
 
 > synth_data = sample_mix_DAGs2(mixDAG,samps) # sample from the mixture of DAGs
 
-# Run CIM on Synthetic Data
+# Run CIM on the Data
 
-> out = cim_out = CIM(suffStat, GCM_wrap, alpha=0.01, p=ncol(suffStat$data), waves=waves) # run CIM
+> out = CIM(suffStat, GCM_wrap, alpha=0.01, p=ncol(suffStat$data), waves=waves) # run CIM
 
 > print(out$f_star) # print F*
 
