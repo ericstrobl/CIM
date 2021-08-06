@@ -14,14 +14,17 @@ The package depends on the MASS, pcalg and igraph packages, so please install th
 
 # Sample from a Mixture of DAGs
 
-> waves = list(w1=1:8,w2=9:16,w3=17:24) # create 3 waves containing 8 variables each
+> waves = list(w1=1:8,w2=9:16,w3=17:24) # create 3 waves, aka time steps, containing 8 variables each
 
 > mixDAG = generate_mix_DAGs2(24,en=2,waves) # generate a mixture DAGs, also include latent and selection variables
+> resort_p = sample(c(mixDAG$waves_L$w1,mixDAG$waves_L$w2,mixDAG$waves_L$w3),24-length(mixDAG$L),replace=FALSE) # remove latent variables and randomize variable order
+> waves = list(w1 = match(mixDAG$waves_L$w1,resort_p), w2 = match(mixDAG$waves_L$w2,resort_p), w3 = match(mixDAG$waves_L$w3,resort_p)) # wave prior knowledge
 
 > synth_data = sample_mix_DAGs2(mixDAG,samps) # sample from the mixture of DAGs
 
 # Run CIM on the Data
 
+> suffStat = list(); suffStat$data = synth_data[,resort_p];
 > out = CIM(suffStat, GCM_wrap, alpha=0.01, p=ncol(suffStat$data), waves=waves) # run CIM
 
 > print(out$f_star) # print F*
