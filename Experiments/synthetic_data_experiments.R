@@ -1,4 +1,6 @@
 
+### RUN EXPERIMENTS
+
 # define number of samples
 samps = 2000
 
@@ -93,3 +95,64 @@ for (t in 1:50){
   # save outputs
   save(res, res_graphs, file = "synthetic_results.RData")
 }
+
+
+### RESULTS
+
+metrics_fo = matrix(0,50,5) # fallout
+metrics_OA = matrix(0,50,5) # overall score
+metrics_sens = matrix(0,50,5) # sensitivity
+metrics_time = matrix(0,50,5) # time
+algs_index = c(2,4,6,8,10)
+for (t in 1:50){
+  load("synthetic_results.RData")
+  for (a in algs_index){
+    
+    # compute fallout
+    cum_res2 = res_graphs[[t]]$graph[res_graphs[[t]]$waves_L$w2,res_graphs[[t]]$waves_L$w2]
+    ans_res2 = res[[t]][[a]][(length(res_graphs[[t]]$waves_L$w1)+1):(length(res_graphs[[t]]$waves_L$w1)+length(res_graphs[[t]]$waves_L$w2)),
+                             (length(res_graphs[[t]]$waves_L$w1)+1):(length(res_graphs[[t]]$waves_L$w1)+length(res_graphs[[t]]$waves_L$w2))]
+    err2 = length(intersect(which(t(cum_res2)!=0),which(t(ans_res2)==3)))
+    
+    cum_res3 = res_graphs[[t]]$graph[res_graphs[[t]]$waves_L$w3,res_graphs[[t]]$waves_L$w3]
+    ans_res3 = res[[t]][[a]][(length(res_graphs[[t]]$waves_L$w1)+length(res_graphs[[t]]$waves_L$w2)+1):(length(res_graphs[[t]]$waves_L$w1)+length(res_graphs[[t]]$waves_L$w2)+length(res_graphs[[t]]$waves_L$w3)),
+                             (length(res_graphs[[t]]$waves_L$w1)+length(res_graphs[[t]]$waves_L$w2)+1):(length(res_graphs[[t]]$waves_L$w1)+length(res_graphs[[t]]$waves_L$w2)+length(res_graphs[[t]]$waves_L$w3))]
+    err3 = length(intersect(which(t(cum_res3)!=0),which(t(ans_res3)==3)))
+    
+    cres2 = sum(t(cum_res2)!=0)
+    cres3 = sum(t(cum_res3)!=0)
+    if ((cres2+cres3) > 0){
+      errF = (err2+err3)/(cres2+cres3)
+    } else{
+      errF = 0;
+    }
+    metrics_fo[t,which(algs_index==a)]=errF # record fallout
+  
+   
+    # compute sensitivity
+    cum_res2 = res_graphs[[t]]$graph[res_graphs[[t]]$waves_L$w2,res_graphs[[t]]$waves_L$w2]
+    ans_res2 = res[[t]][[a]][(length(res_graphs[[t]]$waves_L$w1)+1):(length(res_graphs[[t]]$waves_L$w1)+length(res_graphs[[t]]$waves_L$w2)),
+                             (length(res_graphs[[t]]$waves_L$w1)+1):(length(res_graphs[[t]]$waves_L$w1)+length(res_graphs[[t]]$waves_L$w2))]
+    err2 = length(intersect(which(cum_res2!=0),which(t(ans_res2)==3)))
+    
+    cum_res3 = res_graphs[[t]]$graph[res_graphs[[t]]$waves_L$w3,res_graphs[[t]]$waves_L$w3]
+    ans_res3 = res[[t]][[a]][(length(res_graphs[[t]]$waves_L$w1)+length(res_graphs[[t]]$waves_L$w2)+1):(length(res_graphs[[t]]$waves_L$w1)+length(res_graphs[[t]]$waves_L$w2)+length(res_graphs[[t]]$waves_L$w3)),
+                             (length(res_graphs[[t]]$waves_L$w1)+length(res_graphs[[t]]$waves_L$w2)+1):(length(res_graphs[[t]]$waves_L$w1)+length(res_graphs[[t]]$waves_L$w2)+length(res_graphs[[t]]$waves_L$w3))]
+    err3 = length(intersect(which(cum_res3!=0),which(t(ans_res3)==3)))
+    
+    cres2 = sum(cum_res2!=0)
+    cres3 = sum(cum_res3!=0)
+    if ((cres2+cres3) > 0){
+      err = (err2+err3)/(cres2+cres3)
+    } else{
+      err = 0;
+    }
+    metrics_sens[t,which(algs_index==a)]=err # record sensitivty
+    metrics_OA[t,which(algs_index==a)]=sqrt( metrics_fo[t,which(algs_index==a)]^2 + (1-metrics_sens[t,which(algs_index==a)])^2 )  # record overall score
+    metrics_time[t,which(algs_index==a)]=res[[t]][[a+1]][3] # record time
+  }
+}
+
+print(colMeans(metrics_sens))
+print(colMeans(metrics_fo))
+print(colMeans(metrics_OA))
