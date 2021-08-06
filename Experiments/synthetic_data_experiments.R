@@ -38,7 +38,7 @@ for (t in 1:50){
     start_time <- proc.time()
     cim_out = CIM(suffStat, GCM_wrap, alpha=0.01, p=ncol(suffStat$data), 
                   verbose=FALSE, waves=waves, prior_know = prior_know, resIP=resSkel)
-    cim_out$G = cim_out$pofaag[order(resort_p),order(resort_p)]
+    cim_out$G = cim_out$f_star[order(resort_p),order(resort_p)]
     colnames(cim_out$G) <- c(mixDAG$waves_L$w1,mixDAG$waves_L$w2,mixDAG$waves_L$w3)
     rownames(cim_out$G) <- c(mixDAG$waves_L$w1,mixDAG$waves_L$w2,mixDAG$waves_L$w3)
     res[[t]]$cim_waves = cim_out$G
