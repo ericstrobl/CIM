@@ -6,8 +6,6 @@ The Experiments folder contains code needed to replicate the synthetic data resu
 
 # Installation
 
-The package depends on the MASS, pcalg and igraph packages, so please install those first. Then:
-
 > library(devtools)
 
 > install_github("ericstrobl/CIM")
