@@ -31,11 +31,11 @@ The package depends on the MASS, pcalg and igraph packages, so please install th
 
 Let S denote the selection variables.
 
-`out$pofaag[i,j] = 0` means that CIM could render i and j conditionally independent
+`out$f_star[i,j] = 0` means that CIM could find a set rendering i and j conditionally independent
 
-`out$pofaag[i,j] = 1` means CIM could *not* render i and j conditionally independent, and CIM does *not* know if j is an ancestor or not an ancestor of i or S
+`out$f_star[i,j] = 1` means CIM could *not* find a set rendering i and j conditionally independent, and CIM does *not* know if j is an ancestor or not an ancestor of i or S in F*
 
-`out$pofaag[i,j] = 2` means j is *not* an ancestor of i in F*
+`out$f_star[i,j] = 2` means j is *not* an ancestor of i in F*
 
-`out$pofaag[i,j] = 3` means j is an ancestor of i or S in F*
+`out$f_star[i,j] = 3` means j is an ancestor of i or S in F*
 
