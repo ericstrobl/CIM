@@ -8,9 +8,9 @@ The package depends on the MASS, pcalg and igraph packages, so please install th
 
 > library(devtools)
 
-> install_github("ericstrobl/CIM"); install_github("ericstrobl/RCIT")
+> install_github("ericstrobl/CIM")
 
-> library(CIM); library(RCIT); library(pcalg)
+> library(CIM)
 
 # Generate Synthetic Data
 
